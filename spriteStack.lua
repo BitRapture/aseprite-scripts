@@ -33,7 +33,7 @@ function createStack()
 				if cel ~= nil then
 					local ctx = stack:newLayer()
 					ctx.name = "Stack " .. tostring(stackC)
-					stack:newCel(ctx, 1, cel.image, Point(cel.position.x, cel.position.y + (#sprite.frames / 2) - j))
+					stack:newCel(ctx, 1, cel.image, Point(cel.position.x, cel.position.y + #sprite.frames - j))
 					stackC = stackC + 1
 				end
 			
