@@ -16,15 +16,30 @@ end
 function createStack()
 	local sprite = app.activeSprite
 	local stack = Sprite(sprite.width, sprite.height + #sprite.frames)
-	local stackCtx = stack:newCel(stack.layers[1], stack.frames[1])
+	stack:deleteLayer(stack.layers[1])
 	if sprite == nil then 
 		onError("No active sprite selected!")
 		return
 	end
 	
-	for i = 1, #sprite.frames do
+	local stackC = 1
+	for i = 1, #sprite.layers do
 	
-	
+		if sprite.layers[i].isVisible and sprite.layers[i].isImage then
+		
+			for j = 1, #sprite.frames do 
+				
+				local cel = sprite.layers[i]:cel(j)
+				if cel ~= nil then
+					local ctx = stack:newLayer()
+					ctx.name = "Stack " .. tostring(stackC)
+					stack:newCel(ctx, 1, cel.image, Point(cel.position.x, cel.position.y + (#sprite.frames / 2) - j))
+					stackC = stackC + 1
+				end
+			
+			end
+		
+		end
 	
 	end
 	
